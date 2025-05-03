@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Center</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/homepage.css"/>
+    <link rel="stylesheet" type="text/css" href="css/user.css"/>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <!-- logo -->
+            <div class="site-logo">
+                <a href="#">
+                    <img src="img/index/logo1.png" />
+                </a>
+            </div>
+            
+            <!-- 首页导航 -->
+            <div class="site-list">
+                <ul class="clearfix">
+                    <li><a href="homepage.html"><font color="coral"><b>首页</b></font></a></li>
+                    <li><a href="dongman.html">目录</a></li>
+                    <li><a href="paihang.html">排行榜</a></li>
+                    <li>
+                        <a href="history.html">游览记录</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- 登入/注册 -->
+            <div class="login">
+                <a href="user.html"><img src="img/index/yonghu3.png"/></a>
+            </div>
+            
+            <!-- 搜索框 -->
+            <div class="site-search">
+                <form action="">
+                    <input class="search-text" type="text" placeholder="请输入关键字"/>
+                    <input class="submit" type="submit" value="搜索"/>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <h2>个人中心</h2>
+            <ul>
+                <li><a href="#user-info">用户信息</a></li>
+                <li><a href="#account-settings">账户设置</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <section id="user-info">
+                <h2>用户信息</h2>
+                <div class="user-profile">
+                    <img src="img/index/yonghu3.png" alt="头像" class="avatar" id="avatar">
+                    <div class="user-details">
+                        <p id="nicknameDisplay"></p>
+                        <p id="signatureDisplay">签名：这个人很懒，还没有签名</p>
+                    </div>
+                </div>
+            </section>
+            <section id="account-settings">
+                <h2>账户设置</h2>
+                <div class="settings">
+                    <button onclick="showChangePasswordForm()">修改密码</button>
+                    <button onclick="showChangeSignatureForm()">修改签名</button>
+                    <button onclick="showChangeAvatarForm()">修改头像</button>
+                    <section id="changeAvatarForm" style="display: none;">
+                        <h2>修改头像</h2>
+                        <form onsubmit="submitChangeAvatarForm(event)">
+                            <label for="newAvatar">选择头像:</label>
+                            <input type="file" id="newAvatar" name="newAvatar" accept="image/*" required>
+                            <button type="submit">上传头像</button>
+                        </form>
+                        <button onclick="closeChangeAvatarForm()" class="close-button">关闭</button>
+                    </section>
+                    
+                    <button onclick="logout()">退出登录</button>
+                    <section id="changeSignatureForm" style="display: none;">
+                        <h2>修改签名</h2>
+                        <!-- 修改签名表单 -->
+                        <form onsubmit="submitChangeSignatureForm(event)">
+                            <label for="newSignature">新签名:</label>
+                            <input type="text" id="newSignature" name="newSignature" required>
+                            <button type="submit">提交</button>
+                        </form>
+                    </section>
+                </section>
+                <!-- 修改签名表单 -->
+                </div>
+            </section>
+            <!-- 其他模块类似，可以根据需要进行扩展 -->
+        </div>
+    </div>
+    <script src="js/user.js"></script>
+    <script src="js/homepage.js"></script>
+</body>
+</html>
+

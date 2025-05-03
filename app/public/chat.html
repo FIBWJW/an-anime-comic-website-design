@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="css/chat.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="js/crypto-js.min.js"></script>
+  <script src="js/xf-voice-dictation.js"></script>
+  <script src="js/chat.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header" style="text-align: center">
+      <img
+        class="header-icon"
+        src="img/robot.png"
+        width="50px"
+        height="50px"
+      />
+    </div>
+    <div class="content"></div>
+    <div class="input-area">
+      <textarea
+        name="text"
+        id="textarea"
+        placeholder="Send a message"
+      ></textarea>
+      <div class="button-area">
+        <button id="voice-btn" onclick="startVoiceRecognition()">语音输入</button>
+        <button id="send-btn" onclick="send()">发 送</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let voiceRecognitionInProgress = false;
+    let xfVoice;
+
+    window.onload = function () {
+      xfVoice = new XfVoiceDictation({
+        APPID: 'ec7ad1e7',
+        APISecret: 'ZDJhZTg4NDhkOWQzMTFhMWQ0OGNlYmNl',
+        APIKey: '79f772942f1d846c032cbd7d3c3b8077',
+        onTextChange: function (text) {
+          $('#textarea').val(text);
+        },
+        onWillStatusChange: function (oldStatus, newStatus) {
+          if (newStatus === 'ing') {
+            $('#voice-btn').text('正在识别');
+          } else {
+            $('#voice-btn').text('语音识别');
+          }
+        }
+      });
+    };
+
+
+    let time = dateFormat("YYYY-mm-dd HH:MM", new Date());
+    let str = `
+      <div class="item item-center"><span>${time}</span></div>
+      <div class="item item-left">
+          <div class="avatar">
+              <img src="img/robot.png" />
+          </div>
+          <div class="bubble bubble-left">欢迎您，我是您的动漫推荐助手，很高兴为您服务。</div>
+      </div>
+      `;
+      $($(".content")[0]).append(str);
+
+
+
+      
+    function startVoiceRecognition() {
+      if (!voiceRecognitionInProgress) {
+        voiceRecognitionInProgress = true;
+        xfVoice.start();
+      } else {
+        voiceRecognitionInProgress = false;
+        xfVoice.stop();
+      }
+    }
+  </script>
+</body>
+
+</html>

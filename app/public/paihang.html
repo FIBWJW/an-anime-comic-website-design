@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>排行榜</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/dongman.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <style>
+            body {
+                background-color: #414141;
+                color: #ffffff;
+                font-family: Arial, sans-serif;
+            }
+            .container {
+                width: 80%;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #848484;
+                border-radius: 8px;
+                position: relative;
+            }
+            .dropdown {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+            }
+            .dropdown select {
+                padding: 10px;
+                border-radius: 5px;
+                border: none;
+                background-color: #403f3f;
+                color: #f3f1f1;
+            }
+            .rankings {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 60px;
+            }
+            .rankings .section {
+                flex: 1; /* 设置为弹性子项，平均分配空间 */
+                text-align: center; /* 文本居中 */
+                margin: 0 10px; /* 添加间距 */
+            box-sizing: border-box; /* 确保宽度包括内边距和边框 */
+            }
+            .rankings h2 {
+                color: #ff0000;
+            }
+            .rankings ul {
+                list-style-type: none;
+                padding: 0;
+            }
+            .rankings li {
+                display: flex;
+                justify-content: space-between;
+                margin: 8px 0;
+                padding: 8px;
+                background-color: #4e4d4d;
+                border-radius: 5px;
+            }
+            .rankings li span {
+                display: block;
+            }
+            .rankings li span:first-child {
+                width: 10%;
+            }
+            .rankings li span:nth-child(2) {
+                width: 70%;
+                text-align: left;
+            }
+            .rankings li span:last-child {
+                width: 20%;
+                text-align: right;
+            }
+        </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="container">
+            
+            <!-- logo -->
+            <div class="site-logo">
+                <a href="#">
+                    <img src="img/index/logo1.png" />
+                </a>
+            </div>
+            
+            <!-- 首页导航 -->
+            <div class="site-list">
+                <ul class="clearfix">
+                    <li>
+                        <a href="homepage.html">首页</a>
+                    </li>
+                    <li>
+                        <a href="#"><font color="coral"><b>动漫</b></font></a>
+                    </li>
+                </ul>
+        
+            </div> 
+            <!-- 登入/注册 -->
+            <div class="login">
+                <a href="user.html">
+                    <img src="img/index/yonghu3.png"/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <body>
+
+        <div class="container">
+            <div class="dropdown">
+                <select>
+                    <option>请选择年份</option>
+                    <option>2024</option>
+                    <option>2023</option>
+                    <option>2022</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+            <div class="rankings">
+                <div class="section">
+                    <h2>总榜 TOP20</h2>
+                    <ul>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h2>月榜 TOP50</h2>
+                    <ul>
+                        <li><span>1</span><span>进击的巨人</span><span>14200</span></li>
+<li><span>2</span><span>钢之炼金术师</span><span>13800</span></li>
+<li><span>3</span><span>86-不存在的战区</span><span>13500</span></li>
+<li><span>4</span><span>龙珠</span><span>13300</span></li>
+<li><span>5</span><span>死亡笔记</span><span>12700</span></li>
+<li><span>6</span><span>鬼灭之刃</span><span>12500</span></li>
+<li><span>7</span><span>未来日记</span><span>12300</span></li>
+<li><span>8</span><span>火影忍者</span><span>12000</span></li>
+<li><span>9</span><span>全职猎人</span><span>11500</span></li>
+<li><span>10</span><span>寄生兽</span><span>11200</span></li>
+<li><span>11</span><span>东京喰种</span><span>11000</span></li>
+<li><span>12</span><span>黑执事</span><span>10800</span></li>
+<li><span>13</span><span>一拳超人</span><span>10500</span></li>
+<li><span>14</span><span>Re:从零开始的异世界生活</span><span>10300</span></li>
+<li><span>15</span><span>Fate/stay night</span><span>9900</span></li>
+<li><span>16</span><span>海贼王</span><span>9800</span></li>
+<li><span>17</span><span>辉夜大小姐想让我告白</span><span>9600</span></li>
+<li><span>18</span><span>刀剑神域</span><span>9500</span></li>
+<li><span>19</span><span>七大罪</span><span>8800</span></li>
+<li><span>20</span><span>异度侵入</span><span>8700</span></li>
+
+                    </ul>
+                </div>
+                <div class="section">
+                    <h2>周榜 TOP50</h2>
+                    <ul>
+                        <li><span>21</span><span>咒术回战</span><span>14700</span></li>
+                        <li><span>22</span><span>鬼灭之刃 游郭篇</span><span>14300</span></li>
+                        <li><span>23</span><span>佐贺偶像是传奇</span><span>13600</span></li>
+                        <li><span>24</span><span>石纪元</span><span>13400</span></li>
+                        <li><span>25</span><span>辉夜大小姐想让我告白 第二季</span><span>12900</span></li>
+                        <li><span>26</span><span>Dr.STONE</span><span>12600</span></li>
+                        <li><span>27</span><span>关于我转生变成史莱姆这档事</span><span>12100</span></li>
+                        <li><span>28</span><span>水果篮子</span><span>11800</span></li>
+                        <li><span>29</span><span>炎炎消防队</span><span>11400</span></li>
+                        <li><span>30</span><span>彼方的阿斯特拉</span><span>10900</span></li>
+                        <li><span>31</span><span>鬼灭之刃 无限列车篇</span><span>10700</span></li>
+                        <li><span>32</span><span>进击的巨人 最终季</span><span>10200</span></li>
+                        <li><span>33</span><span>Re:从零开始的异世界生活 第二季</span><span>10000</span></li>
+                        <li><span>34</span><span>无职转生</span><span>9700</span></li>
+                        <li><span>35</span><span>派对浪客诸葛孔明</span><span>9400</span></li>
+                        <li><span>36</span><span>盾之勇者成名录</span><span>9300</span></li>
+                        <li><span>37</span><span>女神宿舍的宿管君</span><span>9000</span></li>
+                        <li><span>38</span><span>蜘蛛，但没完全变成人</span><span>8900</span></li>
+                        <li><span>39</span><span>装甲娘战机</span><span>8500</span></li>
+                        <li><span>40</span><span>暗杀教室</span><span>8300</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    
+    </body>
+    </html>
+    <script src="js/paihang.js"></script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览记录</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/homepage.css"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif !important;
+        }
+        .history-container {
+            width: 80%;
+            margin: auto;
+            padding-top: 20px;
+        }
+        .history-record-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        .history-record-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .history-record-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .history-record-info h3 {
+            margin: 0;
+            font-family: Arial, sans-serif !important;
+            cursor: pointer; /* 添加光标样式以示可点击 */
+            color: blue; /* 设置为蓝色以示链接样式 */
+            text-decoration: underline; /* 添加下划线以示链接样式 */
+        }
+        .history-record-time {
+            color: gray;
+            font-size: 14px;
+            font-family: Arial, sans-serif !important;
+        }
+        .history-record-category {
+            color: gray;
+            font-size: 14px;
+            font-family: Arial, sans-serif !important;
+        }
+        .delete-button {
+            position: absolute;
+            right: 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .clear-button {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="site-logo">
+                <a href="#">
+                    <img src="img/index/logo1.png" />
+                </a>
+            </div>
+            <div class="site-list">
+                <ul class="clearfix">
+                    <li>
+                        <a href="homepage.html">首页</a>
+                    </li>
+                    <li>
+                        <a href="dongman.html"><font color="coral"><b>动漫</b></font></a>
+                    </li>
+                </ul>
+            </div> 
+            <div class="login">
+                <a href="login.html">
+                    <img src="img/index/yonghu3.png"/>
+                </a>
+            </div>
+            <div class="site-search">
+                <form action="">
+                    <input class="search-text" type="text" placeholder="请输入关键字"/>
+                    <input class="submit" type="submit" value="搜索"/>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="history-container">
+        <h2>浏览记录</h2>
+        <div id="history-list">
+            <!-- JavaScript will dynamically insert history items here -->
+        </div>
+        <button class="clear-button" onclick="clearHistory()">清空浏览记录</button>
+    </div>
+
+    <script>
+        function loadHistory() {
+            let historyList = JSON.parse(localStorage.getItem('browsingHistory')) || [];
+
+            // 按时间倒序排序，最新的在最前面
+            historyList.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+            let historyContainer = document.getElementById('history-list');
+            historyContainer.innerHTML = ''; // 清空历史记录列表
+
+            historyList.forEach((item, index) => {
+                let historyItem = document.createElement('div');
+                historyItem.classList.add('history-record-item');
+
+                let img = document.createElement('img');
+                img.src = item.image;
+                img.alt = item.title;
+                historyItem.appendChild(img);
+
+                let info = document.createElement('div');
+                info.classList.add('history-record-info');
+
+                let title = document.createElement('h3');
+                let titleLink = document.createElement('a'); // 添加链接元素
+                titleLink.href = '#'; // 设置为占位符，点击时使用后端数据更新
+                titleLink.textContent = item.title; // 设置链接文字
+                titleLink.addEventListener('click', function(event) {
+                    event.preventDefault(); // 阻止默认行为
+                    fetchAnimeDetail(item.comic_id); // 获取动漫详情并跳转
+                });
+                title.appendChild(titleLink); // 将链接添加到标题中
+                info.appendChild(title);
+
+                let time = document.createElement('div');
+                time.classList.add('history-record-time');
+                time.textContent = item.time;
+                info.appendChild(time);
+
+                let category = document.createElement('div');
+                category.classList.add('history-record-category');
+                category.textContent = item.category;
+                info.appendChild(category);
+
+                let deleteButton = document.createElement('button');
+                deleteButton.textContent = '删除';
+                deleteButton.classList.add('delete-button');
+                deleteButton.onclick = () => deleteHistoryItem(index);
+                historyItem.appendChild(deleteButton);
+
+                historyItem.appendChild(info);
+                historyContainer.appendChild(historyItem);
+            });
+        }
+
+        function deleteHistoryItem(index) {
+            let historyList = JSON.parse(localStorage.getItem('browsingHistory')) || [];
+            historyList.splice(index, 1); // 删除指定索引的记录
+            localStorage.setItem('browsingHistory', JSON.stringify(historyList));
+            loadHistory(); // 重新加载历史记录
+        }
+
+        function clearHistory() {
+            localStorage.removeItem('browsingHistory');
+            loadHistory(); // 重新加载历史记录
+        }
+
+        async function fetchAnimeDetail(comic_id) {
+            try {
+                const response = await fetch(`/get-anime-detail?comic_id=${comic_id}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch anime detail');
+                }
+                const data = await response.json();
+                const html = data.html; // 假设后端返回动漫详情页面的路径
+                window.location.href = html; // 跳转到动漫详情页面
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadHistory);
+    </script>
+    <script src="js/homepage.js"></script>
+    <script src="js/history.js"></script>
+</body>
+</html>

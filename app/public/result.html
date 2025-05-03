@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索结果</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/homepage.css"/>
+	<link rel="stylesheet" href="css/result.css">
+</head>
+<body>
+    <!---------------- 导航栏 ------------------>
+		<div class="header">
+			<div class="container">
+				
+				<!-- logo -->
+				<div class="site-logo">
+					<a href="#">
+						<img src="img/index/logo1.png" />
+					</a>
+				</div>
+				
+				<!-- 首页导航 -->
+				<div class="site-list">
+					<ul class="clearfix">
+						<li>
+							<a href="homepage.html"><font color="coral"><b>首页</b></font></a>
+						</li>
+						<li>
+							<a href="dongman.html">目录</a>
+						</li>
+						<li>
+							<a href="paihang.html">排行榜</a>
+						</li>
+						<li>
+							<a href="">客户端下载</a>
+						</li>
+					</ul>
+				</div>
+				<!-- 登入/注册 -->
+				<div class="login">
+					<a href="user.html">
+						<img src="img/index/yonghu3.png"/>
+					</a>
+				</div>
+				<!-- 搜索框 -->
+				<div class="site-search">
+					<form action="">
+						<input class="search-text"   type="text" placeholder="请输入关键字"/>
+						<input class="submit" type="submit" value="搜索"/>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="search-result-title" id="search-result-title"></div>
+		<div class="search-results" id="search-results"></div>
+        <script src="js/result.js"></script>
+</body>
+</html>
